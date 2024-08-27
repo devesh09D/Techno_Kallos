@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lookbook - Tangled Tales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #008080;
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        .nav-links {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 18px;
+            margin-left: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            overflow-x: auto;
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+        }
+        .lookbook-item {
+            position: relative;
+            min-width: 300px;
+            overflow: hidden;
+        }
+        .lookbook-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .lookbook-item img.zoomed {
+            transform: scale(1.5);
+        }
+        .highlight-info {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .lookbook-item:hover .highlight-info {
+            display: block;
+        }
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .shop-button {
+            background-color: #008080;
+            color: #FFFFFF;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .shop-button:hover {
+            background-color: #003D3D;
+        }
+        .more-looks-button {
+            background-color: #008080;
+            color: #FFFFFF;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 40px;
+        }
+        .more-looks-button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        Tangled Tales Lookbook
+        <div class="nav-links">
+            <a href="frontpage.html">Home</a>
+            <a href="Collection_page.html">Collection</a>
+            <a href="Product_page.html">Product</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Look 1 -->
+        <div class="lookbook-item">
+            <img src="look1.png" alt="Look 1" id="look1">
+            <div class="highlight-info" style="top: 27%; left: 30%;">Stylish Jacket</div>
+            <div class="highlight-info" style="top: 55%; left: 48%;">Trendy Pants</div>
+            <div class="highlight-info" style="top: 72%; left: 40%;">Elegant Shoes</div>
+            <div class="button-container">
+                <a href="look1_price.html" class="shop-button">Shop the Look</a>
+            </div>
+        </div>
+        <!-- Look 2 -->
+        <div class="lookbook-item">
+            <img src="look2.jpg" alt="Look 2" id="look2">
+            <div class="highlight-info" style="top: 30%; left: 52%;">Suit</div>
+            <div class="highlight-info" style="top: 65%; left: 50%;">Designer bag</div>
+            <div class="button-container">
+                <a href="look2_price.html" class="shop-button">Shop the Look</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="more-looks-button">Click to Buy More Looks</button>
+    </div>
+
+    <script>
+        // Zoom functionality on image click
+        document.querySelectorAll('.lookbook-item img').forEach(img => {
+            img.addEventListener('click', function() {
+                this.classList.toggle('zoomed');
+            });
+        });
+    </script>
+
+</body>
+</html>

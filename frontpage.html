@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tangled Tales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #FFFFFF; /* White background */
+            color: #003D3D; /* Dark Turquoise for text */
+            font-family: 'Arial', sans-serif;
+        }
+        header {
+            background-color: #008080; /* Elegant Teal */
+            color: #FFFFFF; /* White text */
+            padding: 20px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif; /* Elegant, catchy font */
+            letter-spacing: 2px;
+        }
+        nav {
+            background-color: #003D3D; /* Dark Turquoise */
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            position: relative;
+            display: inline-block;
+        }
+        nav ul .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #003D3D;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            min-width: 160px;
+        }
+        nav ul li:hover .dropdown {
+            display: block;
+        }
+        nav ul .dropdown li {
+            display: block;
+        }
+        nav a {
+            color: #E0FFFF; /* Soft Turquoise */
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s;
+            padding: 10px;
+        }
+        nav a:hover {
+            color: #40E0D0; /* Bright Turquoise on hover */
+            background-color: #003D3D; /* Dark Turquoise background on hover */
+        }
+        .search-bar {
+            margin: 20px 20px 30px auto;
+            text-align: right;
+        }
+        .search-bar input[type="text"] {
+            width: 40%; /* Smaller width */
+            padding: 8px;
+            font-size: 16px; /* Smaller font size */
+            border: 2px solid #008080; /* Elegant Teal border */
+            border-radius: 5px;
+        }
+        .search-bar button {
+            padding: 8px 16px;
+            font-size: 16px; /* Smaller font size */
+            background-color: #008080; /* Elegant Teal button */
+            color: #FFFFFF; /* White text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .search-bar button:hover {
+            background-color: #003D3D; /* Dark Turquoise on hover */
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: url('hs.png') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #FFFFFF; /* White text */
+        }
+        .hero .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Darkened overlay */
+        }
+        .motto {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #008080; /* Elegant Teal */
+            font-weight: bold;
+            font-family: 'Georgia', serif; /* Elegant font */
+        }
+        .hero-content {
+            position: relative;
+            text-align: center;
+            z-index: 2;
+            color: #FFFFFF; /* White text */
+            padding: 20px;
+        }
+        .hero-content h1 {
+            font-size: 48px;
+            margin: 0;
+            font-family: 'Georgia', serif; /* Elegant font */
+            font-weight: bold;
+            color: #E0FFFF; /* Soft Turquoise */
+        }
+        .hero-content p {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #E0FFFF; /* Soft Turquoise */
+        }
+        .hero-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #008080; /* Elegant Teal */
+            color: #FFFFFF; /* White text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .hero-button:hover {
+            background-color: #003D3D; /* Dark Turquoise */
+        }
+        .trending-collections {
+            padding: 50px;
+            background-color: #FFFFFF; /* White background */
+            text-align: center;
+        }
+        .trending-collections h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #008080; /* Elegant Teal */
+        }
+        .product-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .product-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 10px;
+            flex: 1;
+            scroll-behavior: smooth;
+        }
+        .product-card {
+            min-width: 300px;
+            background-color: #FFFFFF; /* White background */
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #003D3D; /* Dark Turquoise border */
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .product-details {
+            padding: 20px;
+            text-align: center;
+            background-color: #FFFFFF; /* White background */
+        }
+        .product-details h3 {
+            font-size: 22px;
+            margin: 10px 0;
+            color: #008080; /* Elegant Teal */
+        }
+        .product-details p {
+            font-size: 18px;
+            color: #003D3D; /* Dark Turquoise */
+        }
+        .product-details button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #008080; /* Elegant Teal button */
+            color: #FFFFFF; /* White text */
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #008080; /* Elegant Teal */
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 24px;
+            border-radius: 50%;
+        }
+        .scroll-arrow.left-arrow {
+            left: 10px;
+        }
+        .scroll-arrow.right-arrow {
+            right: 10px;
+        }
+        .scroll-arrow:hover {
+            background-color: #006666; /* Darker Teal on hover */
+        }
+        .feedback {
+            padding: 50px;
+            background-color: #F5F5F5;
+            text-align: center;
+        }
+        .feedback form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .feedback label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .feedback input, .feedback textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #CCC;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .feedback button {
+            padding: 10px 20px;
+            background-color: #008080;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .feedback button:hover {
+            background-color: #006666;
+        }
+        footer {
+            background-color: #003D3D; /* Dark Turquoise */
+            color: #FFFFFF; /* White text */
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Tangled Tales
+    </header>
+    <nav>
+        <ul>
+            <li><a href="C:\Users\DEVESH\Desktop\project 0\product\code for product/code.html">Products</a></li>
+            <li>
+                <a href="#">Collections</a>
+                <ul class="dropdown">
+                    <li><a href="C:\Users\DEVESH\Desktop\project 0\collections for woman/cfr.html">Women</a></li>
+                    <li><a href="C:\Users\DEVESH\Desktop\project 0\collections for men/cfm.html">Men</a></li>
+                    <li><a href="C:\Users\DEVESH\Desktop\project 0\collections for kids/cfk.html">Kids</a></li>
+                </ul>
+            </li>
+            <li><a href="C:\Users\DEVESH\Desktop\project 0\lookbook/lookbook.html">Look Book</a></li>
+        </ul>
+    </nav>
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+    <div class="motto">
+        "Crafted for Those Who Dare to Define Luxury"
+    </div>
+
+    <div class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1>Welcome to Tangled Tales</h1>
+            <p>Your one-stop destination for curated collections</p>
+            <a href="#products" class="hero-button">Explore Now</a>
+        </div>
+    </div>
+    <section class="trending-collections">
+        <h2>Trending Collections</h2>
+        <div class="product-container">
+            <button class="scroll-arrow left-arrow" onclick="scrollProducts(-1)">&#10094;</button>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="C:\Users\DEVESH\Desktop\project 0\front_page/prod1.jpg" alt="Product 1">
+                    <div class="product-details">
+                        <h3>Luxury Blazer</h3>
+                        <p>$1200</p>
+                        <button>Shop Now</button>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="C:\Users\DEVESH\Desktop\project 0\front_page/prod2.jpg" alt="Product 2">
+                    <div class="product-details">
+                        <h3>Designer Handbag</h3>
+                        <p>$2500</p>
+                        <button>Shop Now</button>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="C:\Users\DEVESH\Desktop\project 0\front_page/prod3.jpg" alt="Product 3">
+                    <div class="product-details">
+                        <h3>Elegant Watch</h3>
+                        <p>$3500</p>
+                        <button>Shop Now</button>
+                    </div>
+                </div>
+                <!-- New Product 4 -->
+                <div class="product-card">
+                    <img src="PROD4.jpg" alt="New Product 4">
+                    <div class="product-details">
+                        <h3>Luna Aurelia</h3>
+                        <p>$1500</p>
+                        <button>Shop Now</button>
+                    </div>
+                </div>
+                <!-- New Product 5 -->
+                <div class="product-card">
+                    <img src="PROD5.jpg" alt="New Product 5">
+                    <div class="product-details">
+                        <h3>Ivory Luxe</h3>
+                        <p>$4000</p>
+                        <button>Shop Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="C:\Users\DEVESH\Desktop\project 0\front_page/prod6.jpg" alt="New Product 5">
+                    <div class="product-details">
+                        <h3>Grand Couture</h3>
+                        <p>$8000</p>
+                        <button>Shop Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="prod7.jpg" alt="New Product 5">
+                    <div class="product-details">
+                        <h3>Elegant Men's Watch</h3>
+                        <p>$4000</p>
+                        <button>Shop Now</button>
+                    </div>
+                </div>
+
+            </div>
+            <button class="scroll-arrow right-arrow" onclick="scrollProducts(1)">&#10095;</button>
+        </div>
+    </section>
+    <section class="feedback">
+        <h2>We Value Your Feedback</h2>
+        <form action="#" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2024 Tangled Tales. All rights reserved.</p>
+    </footer>
+    <script>
+        function scrollProducts(direction) {
+            const container = document.querySelector('.product-grid');
+            const scrollAmount = 300; // Adjust this value to change scroll distance
+            container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
